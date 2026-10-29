@@ -14,13 +14,15 @@ Run from the repo root with the Gradle wrapper:
 ./gradlew :androidApp:assembleDebug                         # build debug APK
 ./gradlew :androidApp:installDebug                          # install on a connected device/emulator
 ./gradlew :composeApp:linkDebugFrameworkIosSimulatorArm64   # build the iOS framework for the simulator
+# iOS app: open iosApp/iosApp.xcodeproj in Xcode, or build from CLI:
+#   xcodebuild -project iosApp/iosApp.xcodeproj -scheme iosApp -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build
 ./gradlew allTests                                          # common/Android/iOS unit tests of KMP modules
 ./gradlew lint                                              # Android lint
 ```
 
 ## Build setup
 
-- Modules: thin `androidApp` (Android application) → `composeApp` (shared root UI, iOS framework `ComposeApp`) → `core:*` / `feature:*` KMP libraries. See `.claude/docs/architecture/modules.md`.
+- Modules: `iosApp` (Xcode project, SwiftUI host; its "Compile Kotlin Framework" build phase runs `:composeApp:embedAndSignAppleFrameworkForXcode`, set `TEAM_ID` in `iosApp/Configuration/Config.xcconfig` for device builds) and thin `androidApp` (Android application) → `composeApp` (shared root UI, iOS framework `ComposeApp`) → `core:*` / `feature:*` KMP libraries. See `.claude/docs/architecture/modules.md`.
 - **Convention plugins** in the included build `build-logic/convention` hold all shared configuration. Module build files only apply one of them and declare dependencies:
   - `pocketinbox.kmp.library` — KMP + `com.android.kotlin.multiplatform.library`, targets android, `iosArm64`, `iosSimulatorArm64`. Android namespace is derived from the module path (`:core:designsystem` → `com.vazdautsan.pocketinbox.core.designsystem`).
   - `pocketinbox.cmp.library` — the above + Compose Multiplatform and base Compose libraries.

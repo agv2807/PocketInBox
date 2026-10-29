@@ -21,4 +21,4 @@
 | Логирование | Kermit | — |
 | Сеть | Нет (офлайн). В будущем — Ktor Client | [004](../decisions/ADR-004-offline-first.md) |
 | Тесты | `kotlin.test`, Turbine | — |
-| iOS-интеграция | Framework через build phase Xcode, без CocoaPods | — |
+| iOS-интеграция | ✅ Статический framework `ComposeApp` через build phase Xcode (`embedAndSignAppleFrameworkForXcode`), без CocoaPods | — |

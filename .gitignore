@@ -15,3 +15,8 @@ build/
 local.properties
 .claude/settings.local.json
 .kotlin/
+
+# Xcode
+xcuserdata/
+DerivedData/
+*.xcworkspace/xcuserdata/

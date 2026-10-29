@@ -1,11 +1,11 @@
 # Модули
 
-> Статус: частично создана — `build-logic`, `androidApp`, `composeApp`, `core:designsystem`. Остальное — целевое. Обоснование — [ADR-005](../decisions/ADR-005-multimodule.md).
+> Статус: частично создана — `build-logic`, `androidApp`, `iosApp`, `composeApp`, `core:designsystem`. Остальное — целевое. Обоснование — [ADR-005](../decisions/ADR-005-multimodule.md).
 
 ```
 build-logic/convention   — convention plugins: pocketinbox.kmp.library, .cmp.library, .android.application
 androidApp               — тонкий Android application: Activity, Application
-iosApp                   — Xcode-проект
+iosApp                   — Xcode-проект: SwiftUI-обёртка над MainViewController, Config.xcconfig (TEAM_ID, BUNDLE_ID)
 composeApp               — корневой UI, NavHost, сборка Koin-графа, iOS framework
 core/
   common                 — утилиты, dispatchers, базовые MVI-классы
