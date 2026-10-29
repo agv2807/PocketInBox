@@ -12,3 +12,4 @@ GitHub Actions, workflow `.github/workflows/ci.yml`. Запускается на
 - JDK — Temurin 17 через `actions/setup-java`. Кэш Gradle — `gradle/actions/setup-gradle`. Кэш Kotlin/Native (`~/.konan`) обновляется при изменении `gradle/libs.versions.toml`.
 - На Linux iOS-таргеты не собираются, поэтому `iosTest` (DAO-тесты `core:database`, см. [testing.md](testing.md)) в CI пока не запускаются. Чтобы включить их, добавьте в `ios-build` шаг `./gradlew iosSimulatorArm64Test`.
 - Job'ы независимы и идут параллельно, каждый виден в PR отдельной проверкой.
+- Репозиторий публичный, поэтому минуты стандартных раннеров (включая macOS) не тарифицируются. Поэтому же в репозиторий нельзя коммитить ключи (см. [secrets.md](secrets.md)). Если CI понадобятся секреты (подпись, API-ключи), их хранят в GitHub Secrets и не передают в job'ы, которые запускаются на PR из форков.
