@@ -12,9 +12,9 @@
 
 ## Следующие шаги
 
-1. `build-logic` и convention plugins, перенос `:app` → `androidApp` + `composeApp`.
+1. ✅ `build-logic` и convention plugins, перенос `:app` → `androidApp` + `composeApp`, тема → `core:designsystem`. Android запускается, iOS framework собирается.
 2. `iosApp`, запуск пустого экрана на обеих платформах.
-3. `core:*`: MVI-контракт, тема, Room, репозиторий.
+3. `core:*`: MVI-контракт, Room, репозиторий.
 4. `feature:notes`: список + добавление.
 
 ## Открытые вопросы

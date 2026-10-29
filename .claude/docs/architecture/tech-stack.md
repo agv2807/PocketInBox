@@ -1,13 +1,13 @@
 # Tech stack
 
-> Статус: утверждён, ещё не внедрён (в репозитории пока Android-шаблон).
+> Статус: внедряется. Отмечено, что уже подключено ✅.
 
 | Область | Решение | ADR |
 |---|---|---|
-| Платформа | Kotlin Multiplatform + Compose Multiplatform | [001](../decisions/ADR-001-kmp-cmp.md) |
-| Android | minSdk 24, targetSdk 36 | — |
-| iOS | Минимум iOS 16, таргеты `iosArm64` и `iosSimulatorArm64` (без `iosX64`) | — |
-| Сборка | AGP 9 (built-in Kotlin), version catalog, convention plugins в `build-logic` | [001](../decisions/ADR-001-kmp-cmp.md), [005](../decisions/ADR-005-multimodule.md) |
+| Платформа | ✅ Kotlin 2.4.21, Compose Multiplatform 1.12.2, material3 1.9.0 | [001](../decisions/ADR-001-kmp-cmp.md) |
+| Android | ✅ minSdk 24, targetSdk 36, compileSdk 37 (минимум для Compose 1.12) | — |
+| iOS | ✅ Минимум iOS 16, таргеты `iosArm64` и `iosSimulatorArm64` (без `iosX64`) | — |
+| Сборка | ✅ AGP 9.1.1 (built-in Kotlin), Gradle 9.3.1, version catalog, convention plugins в `build-logic`, configuration cache | [001](../decisions/ADR-001-kmp-cmp.md), [005](../decisions/ADR-005-multimodule.md) |
 | DI | Koin (`koin-core`, `koin-compose`, `koin-compose-viewmodel`) | — |
 | БД | Room KMP + KSP + `BundledSQLiteDriver` | — |
 | Настройки | DataStore Preferences (KMP) | — |

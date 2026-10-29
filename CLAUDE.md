@@ -4,34 +4,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project knowledge base ("дока")
 
-All project knowledge lives in `.claude/docs/` — the user calls it "дока". Start from `.claude/docs/README.md`: it describes the sections (product, architecture, decisions/ADR, conventions, roadmap) and the rules for maintaining them. Read the relevant sections before design work, and record new decisions and knowledge there (not in personal memory), following those rules.
-
-## Project state
-
-The code is still the generated Android Studio "Empty Compose Activity" template (single `:app` module). The target KMP + CMP architecture is described in the дока (`.claude/docs/architecture/`) and has not been implemented yet.
+All project knowledge lives in `.claude/docs/` — the user calls it "дока". Start from `.claude/docs/README.md`: it describes the sections (product, architecture, decisions/ADR, conventions, roadmap) and the rules for maintaining them. Read the relevant sections before design work, and record new decisions and knowledge there (not in personal memory), following those rules. Current progress is in `.claude/docs/roadmap.md`.
 
 ## Commands
 
 Run from the repo root with the Gradle wrapper:
 
 ```bash
-./gradlew assembleDebug                 # build debug APK
-./gradlew installDebug                  # install on a connected device/emulator
-./gradlew test                          # JVM unit tests (app/src/test)
-./gradlew connectedAndroidTest          # instrumented tests (app/src/androidTest), needs a device/emulator
-./gradlew lint                          # Android lint
-
-# single test class / method
-./gradlew :app:testDebugUnitTest --tests "com.vazdautsan.pocketinbox.ExampleUnitTest"
-./gradlew :app:testDebugUnitTest --tests "com.vazdautsan.pocketinbox.ExampleUnitTest.addition_isCorrect"
-./gradlew :app:connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.vazdautsan.pocketinbox.ExampleInstrumentedTest
+./gradlew :androidApp:assembleDebug                         # build debug APK
+./gradlew :androidApp:installDebug                          # install on a connected device/emulator
+./gradlew :composeApp:linkDebugFrameworkIosSimulatorArm64   # build the iOS framework for the simulator
+./gradlew allTests                                          # common/Android/iOS unit tests of KMP modules
+./gradlew lint                                              # Android lint
 ```
 
 ## Build setup
 
-- **AGP 9.x with built-in Kotlin**: there is no `org.jetbrains.kotlin.android` plugin. Only `com.android.application` and `org.jetbrains.kotlin.plugin.compose` are applied. Don't add the standalone Kotlin Android plugin.
-- Dependencies and plugin versions live in the version catalog `gradle/libs.versions.toml`. Add new libraries there and reference them as `libs.…` in `app/build.gradle.kts`. Compose library versions come from the Compose BOM.
-- `compileSdk` uses the new `release(36) { minorApiLevel = 1 }` DSL. `minSdk` is 24, `targetSdk` is 36, and Java/JVM target is 11.
-- Namespace and applicationId: `com.vazdautsan.pocketinbox`. Sources are in `app/src/main/java/` (Kotlin files in the `java` source dir).
-- UI is Jetpack Compose only (no XML layouts). `PocketInBoxTheme` (`ui/theme/Theme.kt`) uses dynamic color on Android 12+.
+- Modules: thin `androidApp` (Android application) → `composeApp` (shared root UI, iOS framework `ComposeApp`) → `core:*` / `feature:*` KMP libraries. See `.claude/docs/architecture/modules.md`.
+- **Convention plugins** in the included build `build-logic/convention` hold all shared configuration. Module build files only apply one of them and declare dependencies:
+  - `pocketinbox.kmp.library` — KMP + `com.android.kotlin.multiplatform.library`, targets android, `iosArm64`, `iosSimulatorArm64`. Android namespace is derived from the module path (`:core:designsystem` → `com.vazdautsan.pocketinbox.core.designsystem`).
+  - `pocketinbox.cmp.library` — the above + Compose Multiplatform and base Compose libraries.
+  - `pocketinbox.android.application` — `com.android.application` + Compose compiler.
+- **AGP 9 with built-in Kotlin**: never add `org.jetbrains.kotlin.android`, and never apply `com.android.application` together with KMP in one module.
+- Versions live in `gradle/libs.versions.toml` (also used by `build-logic`). Compose Multiplatform artifacts are referenced by coordinates there (`compose-*`); `compose.*` accessors from the Compose plugin are not used. Plugins are declared in the root `build.gradle.kts` with `apply false`.
+- `compileSdk` 37 (required by Compose 1.12), `targetSdk` 36, `minSdk` 24, JVM target 11.
+- Sources live in `src/<sourceSet>/kotlin` (`commonMain`, `androidMain`, `iosMain`; `main` in `androidApp`). Platform specifics go through `expect`/`actual`.
+- Inter-module dependencies use type-safe project accessors (`projects.core.designsystem`).
 - `settings.gradle.kts` sets `RepositoriesMode.FAIL_ON_PROJECT_REPOS`, so repositories must be declared there and not in module build files.
