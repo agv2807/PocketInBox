@@ -28,7 +28,10 @@ class OfflineNotesRepositoryTest {
     fun addNoteStoresTextWithCurrentTime() = runTest {
         repository.addNote("Buy milk")
 
-        assertEquals(listOf(NoteEntity(id = 1, text = "Buy milk", createdAt = now.toEpochMilliseconds())), dao.notes.value)
+        assertEquals(
+            listOf(NoteEntity(id = 1, text = "Buy milk", createdAt = now.toEpochMilliseconds())),
+            dao.notes.value,
+        )
     }
 
     @Test
@@ -36,7 +39,10 @@ class OfflineNotesRepositoryTest {
         dao.notes.value = listOf(NoteEntity(id = 7, text = "Hello", createdAt = 42))
 
         repository.observeNotes().test {
-            assertEquals(listOf(Note(id = 7, text = "Hello", createdAt = Instant.fromEpochMilliseconds(42))), awaitItem())
+            assertEquals(
+                listOf(Note(id = 7, text = "Hello", createdAt = Instant.fromEpochMilliseconds(42))),
+                awaitItem(),
+            )
         }
     }
 

@@ -1,0 +1,59 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(**/.env)",
+      "Read(**/.env.*)",
+      "Read(**/local.properties)",
+      "Read(**/secrets.properties)",
+      "Read(**/keystore.properties)",
+      "Read(**/google-services.json)",
+      "Read(**/GoogleService-Info.plist)",
+      "Read(**/*.jks)",
+      "Read(**/*.keystore)",
+      "Read(**/*.p12)",
+      "Read(**/*.p8)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/*.mobileprovision)",
+      "Edit(**/.env)",
+      "Edit(**/.env.*)",
+      "Edit(**/local.properties)",
+      "Edit(**/secrets.properties)",
+      "Edit(**/keystore.properties)",
+      "Edit(**/google-services.json)",
+      "Edit(**/GoogleService-Info.plist)",
+      "Edit(**/*.jks)",
+      "Edit(**/*.keystore)",
+      "Edit(**/*.p12)",
+      "Edit(**/*.p8)",
+      "Edit(**/*.pem)",
+      "Edit(**/*.key)",
+      "Edit(**/*.mobileprovision)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/guard-secrets-hook.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/scripts/verify-hook.sh",
+            "timeout": 1200,
+            "statusMessage": "Verifying changes (lint, tests, Android + iOS builds)..."
+          }
+        ]
+      }
+    ]
+  }
+}

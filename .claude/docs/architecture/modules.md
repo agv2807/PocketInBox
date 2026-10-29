@@ -3,7 +3,7 @@
 > Статус: создано всё, кроме `core:datastore`. Обоснование — [ADR-005](../decisions/ADR-005-multimodule.md).
 
 ```
-build-logic/convention   — convention plugins: pocketinbox.kmp.library, .cmp.library, .cmp.feature, .room, .android.application
+build-logic/convention   — convention plugins: pocketinbox.kmp.library, .cmp.library, .cmp.feature, .room, .android.application, .lint (корневой проект)
 androidApp               — тонкий Android application: Activity, Application
 iosApp                   — Xcode-проект: SwiftUI-обёртка над MainViewController, Config.xcconfig (TEAM_ID, BUNDLE_ID)
 composeApp               — корневой UI, NavHost, сборка Koin-графа, iOS framework
@@ -31,6 +31,6 @@ feature/
 
 - `feature:*` не зависят друг от друга. Переходы между фичами собираются в `composeApp`.
 - `feature:*` → `core:domain`, `core:designsystem`, `core:common`. Не напрямую в `core:database`.
-- `core:data` → `core:database`, `core:datastore`, `core:domain`.
+- `core:data` → `core:database`, `core:domain` (и `core:datastore`, когда он появится).
 - `composeApp` → все `feature:*` и `core:data` (для DI-графа).
 - `androidApp` → только `composeApp`.

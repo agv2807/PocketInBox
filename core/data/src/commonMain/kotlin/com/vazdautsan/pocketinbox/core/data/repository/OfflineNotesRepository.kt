@@ -23,7 +23,7 @@ internal class OfflineNotesRepository(
             NoteEntity(
                 text = text,
                 createdAt = clock.now().toEpochMilliseconds(),
-            )
+            ),
         )
     }
 }

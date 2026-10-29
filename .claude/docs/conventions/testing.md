@@ -2,7 +2,7 @@
 
 ## Запуск
 
-`./gradlew allTests` — тесты всех KMP-модулей на Android (host/JVM) и на iOS-симуляторе.
+`./gradlew allTests` — тесты всех KMP-модулей на Android (host/JVM) и на iOS-симуляторе. `./gradlew :<module>:allTests` — тесты одного модуля. После задачи тесты изменённых модулей запускает `scripts/verify.sh` ([verification.md](verification.md)).
 
 ## Где писать тесты
 

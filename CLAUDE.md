@@ -8,17 +8,9 @@ All project knowledge lives in `.claude/docs/` — the user calls it "дока".
 
 ## Commands
 
-Run from the repo root with the Gradle wrapper:
+Build, run (Android and iOS), tests and lint: see `.claude/docs/conventions/build-and-run.md`.
 
-```bash
-./gradlew :androidApp:assembleDebug                         # build debug APK
-./gradlew :androidApp:installDebug                          # install on a connected device/emulator
-./gradlew :composeApp:linkDebugFrameworkIosSimulatorArm64   # build the iOS framework for the simulator
-# iOS app: open iosApp/iosApp.xcodeproj in Xcode, or build from CLI:
-#   xcodebuild -project iosApp/iosApp.xcodeproj -scheme iosApp -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build
-./gradlew allTests                                          # unit tests of KMP modules (Android host + iOS simulator), see .claude/docs/conventions/testing.md
-./gradlew lint                                              # Android lint
-```
+A Stop hook (`.claude/settings.json` → `scripts/verify-hook.sh`) runs `scripts/verify.sh` when you finish a response, but only if non-Markdown files changed since its last check: ktlint + detekt on changed files, `allTests` of changed modules, Android and iOS builds. Don't run it manually at the end of a task. **If the hook reports failures, fix them before reporting the task as done.** Details and single-step commands: `.claude/docs/conventions/verification.md`.
 
 ## Build setup
 
@@ -28,6 +20,7 @@ Run from the repo root with the Gradle wrapper:
   - `pocketinbox.cmp.library` — the above + Compose Multiplatform and base Compose libraries.
   - `pocketinbox.android.application` — `com.android.application` + Compose compiler.
   - `pocketinbox.cmp.feature` — cmp.library + kotlinx-serialization + `core:common/domain/designsystem`, Koin ViewModel, lifecycle-compose, navigation. Feature layout: `.claude/docs/conventions/feature-module.md`.
+  - `pocketinbox.lint` — applied to the root project only: `ktlintFiles`, `ktlintFormatFiles`, `detektFiles` tasks running the ktlint/detekt CLIs on `-PlintFiles=a.kt,b.kt` (whole project without it). Config: `.editorconfig`, `config/detekt/detekt.yml`.
   - `pocketinbox.room` — kmp.library + KSP (all targets) + Room plugin, `BundledSQLiteDriver`, schemas exported to `<module>/schemas`.
 - **AGP 9 with built-in Kotlin**: never add `org.jetbrains.kotlin.android`, and never apply `com.android.application` together with KMP in one module.
 - Versions live in `gradle/libs.versions.toml` (also used by `build-logic`). Compose Multiplatform artifacts are referenced by coordinates there (`compose-*`); `compose.*` accessors from the Compose plugin are not used. Plugins are declared in the root `build.gradle.kts` with `apply false`.

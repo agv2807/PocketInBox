@@ -21,4 +21,5 @@
 | Логирование | Kermit | — |
 | Сеть | Нет (офлайн). В будущем — Ktor Client | [004](../decisions/ADR-004-offline-first.md) |
 | Тесты | ✅ `kotlin.test`, kotlinx-coroutines-test, Turbine 1.2.1 ([conventions/testing.md](../conventions/testing.md)) | — |
+| Статический анализ | ✅ ktlint 1.8.0 (`intellij_idea`), detekt 1.23.8; CLI через convention plugin `pocketinbox.lint`, запуск по изменённым файлам ([conventions/verification.md](../conventions/verification.md)) | — |
 | iOS-интеграция | ✅ Статический framework `ComposeApp` через build phase Xcode (`embedAndSignAppleFrameworkForXcode`), без CocoaPods | — |

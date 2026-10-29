@@ -1,0 +1,22 @@
+# Overrides on top of the default detekt config (run with --build-upon-default-config).
+# Formatting is ktlint's job, so detekt only checks code smells.
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated: ['Composable']
+  MatchingDeclarationName:
+    # `navigation/<Feature>Navigation.kt` holds the route type and its NavGraphBuilder extensions
+    active: false
+
+complexity:
+  LongParameterList:
+    ignoreAnnotated: ['Composable']
+  LongMethod:
+    ignoreAnnotated: ['Composable']
+
+style:
+  MagicNumber:
+    ignoreAnnotated: ['Composable', 'Preview']
+    ignorePropertyDeclaration: true
+  UnusedPrivateMember:
+    ignoreAnnotated: ['Preview']
