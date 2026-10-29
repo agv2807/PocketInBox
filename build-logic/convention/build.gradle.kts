@@ -9,6 +9,8 @@ dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.compose.compiler.gradlePlugin)
+    compileOnly(libs.ksp.gradlePlugin)
+    compileOnly(libs.room.gradlePlugin)
 }
 
 gradlePlugin {
@@ -24,6 +26,10 @@ gradlePlugin {
         register("cmpLibrary") {
             id = libs.plugins.pocketinbox.cmp.library.get().pluginId
             implementationClass = "CmpLibraryConventionPlugin"
+        }
+        register("room") {
+            id = libs.plugins.pocketinbox.room.get().pluginId
+            implementationClass = "RoomConventionPlugin"
         }
     }
 }

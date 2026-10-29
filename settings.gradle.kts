@@ -29,4 +29,8 @@ rootProject.name = "PocketInBox"
 
 include(":androidApp")
 include(":composeApp")
+include(":core:common")
 include(":core:designsystem")
+include(":core:database")
+include(":core:domain")
+include(":core:data")

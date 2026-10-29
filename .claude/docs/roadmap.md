@@ -14,7 +14,7 @@
 
 1. ✅ `build-logic` и convention plugins, перенос `:app` → `androidApp` + `composeApp`, тема → `core:designsystem`. Android запускается, iOS framework собирается.
 2. ✅ `iosApp` (Xcode-проект, framework через build phase), экран запускается на Android и iOS.
-3. `core:*`: MVI-контракт, Room, репозиторий.
+3. ✅ `core:common` (MVI), `core:domain`, `core:database` (Room), `core:data` (репозиторий), Koin-граф, тесты.
 4. `feature:notes`: список + добавление.
 
 ## Открытые вопросы
