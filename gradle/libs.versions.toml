@@ -15,6 +15,8 @@ kotlinxCoroutines = "1.11.0"
 kotlinxSerialization = "1.12.0"
 kotlinxDatetime = "0.8.0"
 turbine = "1.2.1"
+ktlint = "1.8.0"
+detekt = "1.23.8"
 
 android-compileSdk = "37"
 android-minSdk = "24"
@@ -51,6 +53,10 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
+# Lint CLIs, run by pocketinbox.lint
+ktlint-cli = { group = "com.pinterest.ktlint", name = "ktlint-cli", version.ref = "ktlint" }
+detekt-cli = { group = "io.gitlab.arturbosch.detekt", name = "detekt-cli", version.ref = "detekt" }
+
 # build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -75,3 +81,4 @@ pocketinbox-kmp-library = { id = "pocketinbox.kmp.library" }
 pocketinbox-cmp-library = { id = "pocketinbox.cmp.library" }
 pocketinbox-cmp-feature = { id = "pocketinbox.cmp.feature" }
 pocketinbox-room = { id = "pocketinbox.room" }
+pocketinbox-lint = { id = "pocketinbox.lint" }

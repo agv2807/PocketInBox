@@ -1,5 +1,5 @@
-import com.vazdautsan.pocketinbox.buildlogic.libs
 import com.vazdautsan.pocketinbox.buildlogic.library
+import com.vazdautsan.pocketinbox.buildlogic.libs
 import com.vazdautsan.pocketinbox.buildlogic.pluginId
 import org.gradle.api.Plugin
 import org.gradle.api.Project

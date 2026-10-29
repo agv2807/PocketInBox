@@ -35,5 +35,9 @@ gradlePlugin {
             id = libs.plugins.pocketinbox.room.get().pluginId
             implementationClass = "RoomConventionPlugin"
         }
+        register("lint") {
+            id = libs.plugins.pocketinbox.lint.get().pluginId
+            implementationClass = "LintConventionPlugin"
+        }
     }
 }
