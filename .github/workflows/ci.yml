@@ -1,0 +1,83 @@
+# CI, see .claude/docs/conventions/ci.md
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ktlint:
+    name: ktlint
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v5
+      # Without -PlintFiles the whole project is checked
+      - run: ./gradlew ktlintFiles
+
+  detekt:
+    name: detekt
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v5
+      - run: ./gradlew detektFiles
+
+  unit-tests:
+    name: Unit tests (JVM)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v5
+      # commonTest of every KMP module on the Android host (JVM) target
+      - run: ./gradlew testAndroidHostTest --continue
+      - name: Upload test reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-reports
+          path: '**/build/reports/tests/'
+
+  ios-build:
+    name: iOS build
+    runs-on: macos-26
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v5
+      - name: Cache Kotlin/Native toolchain
+        uses: actions/cache@v4
+        with:
+          path: ~/.konan
+          key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
+      # The "Compile Kotlin Framework" build phase runs Gradle with the JAVA_HOME from setup-java
+      - name: Build iosApp for simulator
+        run: |
+          xcodebuild -project iosApp/iosApp.xcodeproj -scheme iosApp -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' ARCHS=arm64 \
+            CODE_SIGNING_ALLOWED=NO -quiet build
