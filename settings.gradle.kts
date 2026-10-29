@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -22,5 +23,15 @@ dependencyResolutionManagement {
     }
 }
 
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 rootProject.name = "PocketInBox"
-include(":app")
+
+include(":androidApp")
+include(":composeApp")
+include(":core:common")
+include(":core:designsystem")
+include(":core:database")
+include(":core:domain")
+include(":core:data")
+include(":feature:notes")

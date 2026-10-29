@@ -2,7 +2,7 @@
 
 ## Текущий этап
 
-**1. Каркас KMP + заметки** — scope утверждён 2026-10-29, реализация не начата.
+**1. Каркас KMP + заметки** — завершён 2026-10-29: приложение со списком заметок работает на Android и iOS.
 
 Модули: `build-logic`, `androidApp`, `iosApp`, `composeApp`, `core:common`, `core:designsystem`, `core:database`, `core:domain`, `core:data`, `feature:notes`. Экран описан в [product/overview.md](product/overview.md).
 
@@ -12,10 +12,14 @@
 
 ## Следующие шаги
 
-1. `build-logic` и convention plugins, перенос `:app` → `androidApp` + `composeApp`.
-2. `iosApp`, запуск пустого экрана на обеих платформах.
-3. `core:*`: MVI-контракт, тема, Room, репозиторий.
-4. `feature:notes`: список + добавление.
+1. ✅ `build-logic` и convention plugins, перенос `:app` → `androidApp` + `composeApp`, тема → `core:designsystem`. Android запускается, iOS framework собирается.
+2. ✅ `iosApp` (Xcode-проект, framework через build phase), экран запускается на Android и iOS.
+3. ✅ `core:common` (MVI), `core:domain`, `core:database` (Room), `core:data` (репозиторий), Koin-граф, тесты.
+4. ✅ `feature:notes`: список, пустое состояние, добавление через диалог; навигация и Koin ViewModel.
+
+## Не проверено вручную
+
+- Диалог добавления заметки на iOS: нажатия в симуляторе не автоматизированы. Чтение из Room на iOS проверено, логика добавления общая с Android и покрыта тестами.
 
 ## Открытые вопросы
 

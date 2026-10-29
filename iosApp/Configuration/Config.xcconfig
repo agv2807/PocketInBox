@@ -1,0 +1,5 @@
+// Apple Developer Team ID. Leave empty to build for the simulator only.
+TEAM_ID=
+
+BUNDLE_ID=com.vazdautsan.pocketinbox
+APP_NAME=PocketInBox
