@@ -1,6 +1,7 @@
 package com.vazdautsan.pocketinbox.composeapp.di
 
 import com.vazdautsan.pocketinbox.core.data.di.dataModule
+import com.vazdautsan.pocketinbox.feature.notes.di.notesModule
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 
@@ -8,6 +9,6 @@ import org.koin.dsl.KoinAppDeclaration
 fun startKoinApp(platformConfig: KoinAppDeclaration = {}) {
     startKoin {
         platformConfig()
-        modules(dataModule)
+        modules(dataModule, notesModule)
     }
 }

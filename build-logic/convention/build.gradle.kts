@@ -27,6 +27,10 @@ gradlePlugin {
             id = libs.plugins.pocketinbox.cmp.library.get().pluginId
             implementationClass = "CmpLibraryConventionPlugin"
         }
+        register("cmpFeature") {
+            id = libs.plugins.pocketinbox.cmp.feature.get().pluginId
+            implementationClass = "CmpFeatureConventionPlugin"
+        }
         register("room") {
             id = libs.plugins.pocketinbox.room.get().pluginId
             implementationClass = "RoomConventionPlugin"

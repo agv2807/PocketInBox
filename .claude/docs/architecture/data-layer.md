@@ -23,9 +23,10 @@ feature → NotesRepository (core:domain)
 
 ```
 startKoinApp()                 composeApp — единая точка старта
-  └ dataModule                 core:data
-      └ databaseModule         core:database
-          └ platformDatabaseModule (expect/actual)
+  ├ dataModule                 core:data
+  │   └ databaseModule         core:database
+  │       └ platformDatabaseModule (expect/actual)
+  └ notesModule                feature:notes — ViewModel
 ```
 
 - Android: `PocketInBoxApplication.onCreate` → `startKoinApp { androidContext(...) }`.

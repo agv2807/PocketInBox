@@ -1,21 +1,21 @@
 # Модули
 
-> Статус: создано всё, кроме `core:datastore` и `feature:notes`. Обоснование — [ADR-005](../decisions/ADR-005-multimodule.md).
+> Статус: создано всё, кроме `core:datastore`. Обоснование — [ADR-005](../decisions/ADR-005-multimodule.md).
 
 ```
-build-logic/convention   — convention plugins: pocketinbox.kmp.library, .cmp.library, .room, .android.application
+build-logic/convention   — convention plugins: pocketinbox.kmp.library, .cmp.library, .cmp.feature, .room, .android.application
 androidApp               — тонкий Android application: Activity, Application
 iosApp                   — Xcode-проект: SwiftUI-обёртка над MainViewController, Config.xcconfig (TEAM_ID, BUNDLE_ID)
 composeApp               — корневой UI, NavHost, сборка Koin-графа, iOS framework
 core/
-  common                 — утилиты, dispatchers, базовые MVI-классы
+  common                 — MviViewModel, CollectEffects
   designsystem           — тема (PocketInBoxTheme), общие компоненты
   database               — Room: Database, DAO, entity
   datastore              — настройки (создаётся, когда понадобится)
   domain                 — модели и интерфейсы репозиториев
   data                   — реализации репозиториев, маппинг entity → domain
 feature/
-  notes                  — список заметок и добавление
+  notes                  — список заметок и добавление (образец фичи: conventions/feature-module.md)
 ```
 
 ## Правила

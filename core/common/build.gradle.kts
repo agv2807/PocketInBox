@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.pocketinbox.kmp.library)
+    alias(libs.plugins.pocketinbox.cmp.library)
 }
 
 kotlin {
@@ -7,6 +7,7 @@ kotlin {
         commonMain.dependencies {
             api(libs.lifecycle.viewmodel)
             api(libs.kotlinx.coroutines.core)
+            implementation(libs.lifecycle.runtime.compose)
         }
     }
 }

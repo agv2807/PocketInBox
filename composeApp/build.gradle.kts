@@ -15,6 +15,8 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.designsystem)
             implementation(projects.core.data)
+            implementation(projects.feature.notes)
+            implementation(libs.navigation.compose)
             api(libs.koin.core)
         }
     }

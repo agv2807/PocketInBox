@@ -1,0 +1,10 @@
+<resources>
+    <string name="notes_title">Notes</string>
+    <string name="notes_empty_title">No notes yet</string>
+    <string name="notes_empty_hint">Tap + to add your first note</string>
+    <string name="notes_add">Add note</string>
+    <string name="notes_add_placeholder">Note text</string>
+    <string name="notes_save_error">Couldn\'t save the note</string>
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
+</resources>

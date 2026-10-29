@@ -7,10 +7,13 @@ composeMaterial3 = "1.9.0"
 androidxActivity = "1.13.0"
 androidxComposeUiTooling = "1.12.1"
 androidxLifecycle = "2.11.0"
+androidxNavigation = "2.10.0"
 room = "2.8.5"
 sqlite = "2.6.2"
 koin = "4.2.2"
 kotlinxCoroutines = "1.11.0"
+kotlinxSerialization = "1.12.0"
+kotlinxDatetime = "0.8.0"
 turbine = "1.2.1"
 
 android-compileSdk = "37"
@@ -29,6 +32,9 @@ compose-components-resources = { group = "org.jetbrains.compose.components", nam
 compose-material3 = { group = "org.jetbrains.compose.material3", name = "material3", version.ref = "composeMaterial3" }
 
 lifecycle-viewmodel = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "androidxLifecycle" }
+lifecycle-viewmodel-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
 
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
@@ -36,9 +42,12 @@ sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.r
 
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
+koin-compose-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel", version.ref = "koin" }
 
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinxSerialization" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
@@ -55,6 +64,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }
@@ -63,4 +73,5 @@ room = { id = "androidx.room", version.ref = "room" }
 pocketinbox-android-application = { id = "pocketinbox.android.application" }
 pocketinbox-kmp-library = { id = "pocketinbox.kmp.library" }
 pocketinbox-cmp-library = { id = "pocketinbox.cmp.library" }
+pocketinbox-cmp-feature = { id = "pocketinbox.cmp.feature" }
 pocketinbox-room = { id = "pocketinbox.room" }

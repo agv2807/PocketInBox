@@ -11,5 +11,8 @@
 ## Правила
 
 - UI не вызывает методы ViewModel, кроме `onIntent`.
-- Подписка на `effects` в Compose — через lifecycle-aware collector. Он появится вместе с первой фичей.
+- Подписка на `effects` в Compose — `CollectEffects(viewModel.effects) { ... }` (`core:common`): собирает эффекты, пока экран в состоянии STARTED, на `Dispatchers.Main.immediate`.
+- State в Compose — `collectAsStateWithLifecycle()`.
+- Ошибки операций — эффектом (например, snackbar), а не полем state. `CancellationException` всегда пробрасывается дальше.
+- Как устроен экран фичи — [conventions/feature-module.md](../conventions/feature-module.md).
 - Асинхронная работа — в `viewModelScope`.

@@ -1,0 +1,10 @@
+<resources>
+    <string name="notes_title">Заметки</string>
+    <string name="notes_empty_title">Пока нет заметок</string>
+    <string name="notes_empty_hint">Нажмите +, чтобы добавить первую заметку</string>
+    <string name="notes_add">Новая заметка</string>
+    <string name="notes_add_placeholder">Текст заметки</string>
+    <string name="notes_save_error">Не удалось сохранить заметку</string>
+    <string name="action_save">Сохранить</string>
+    <string name="action_cancel">Отмена</string>
+</resources>

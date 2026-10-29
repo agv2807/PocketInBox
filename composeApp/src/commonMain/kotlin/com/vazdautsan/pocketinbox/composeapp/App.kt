@@ -1,35 +1,19 @@
 package com.vazdautsan.pocketinbox.composeapp
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import com.vazdautsan.pocketinbox.core.designsystem.theme.PocketInBoxTheme
+import com.vazdautsan.pocketinbox.feature.notes.navigation.NotesRoute
+import com.vazdautsan.pocketinbox.feature.notes.navigation.notesScreen
 
 /** Root of the shared UI, hosted by `MainActivity` on Android and `MainViewController` on iOS. */
 @Composable
 fun App() {
     PocketInBoxTheme {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding),
-                contentAlignment = Alignment.Center
-            ) {
-                Text("PocketInBox")
-            }
+        val navController = rememberNavController()
+        NavHost(navController = navController, startDestination = NotesRoute) {
+            notesScreen()
         }
     }
-}
-
-@Preview
-@Composable
-private fun AppPreview() {
-    App()
 }

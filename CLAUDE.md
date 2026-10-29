@@ -27,6 +27,7 @@ Run from the repo root with the Gradle wrapper:
   - `pocketinbox.kmp.library` — KMP + `com.android.kotlin.multiplatform.library`, targets android, `iosArm64`, `iosSimulatorArm64`. Android namespace is derived from the module path (`:core:designsystem` → `com.vazdautsan.pocketinbox.core.designsystem`).
   - `pocketinbox.cmp.library` — the above + Compose Multiplatform and base Compose libraries.
   - `pocketinbox.android.application` — `com.android.application` + Compose compiler.
+  - `pocketinbox.cmp.feature` — cmp.library + kotlinx-serialization + `core:common/domain/designsystem`, Koin ViewModel, lifecycle-compose, navigation. Feature layout: `.claude/docs/conventions/feature-module.md`.
   - `pocketinbox.room` — kmp.library + KSP (all targets) + Room plugin, `BundledSQLiteDriver`, schemas exported to `<module>/schemas`.
 - **AGP 9 with built-in Kotlin**: never add `org.jetbrains.kotlin.android`, and never apply `com.android.application` together with KMP in one module.
 - Versions live in `gradle/libs.versions.toml` (also used by `build-logic`). Compose Multiplatform artifacts are referenced by coordinates there (`compose-*`); `compose.*` accessors from the Compose plugin are not used. Plugins are declared in the root `build.gradle.kts` with `apply false`.
